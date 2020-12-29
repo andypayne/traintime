@@ -18,14 +18,9 @@ struct ContentView: View {
   //@State private var workout: Workout = Workout()
   @ObservedObject var workout: Workout = Workout()
 
-  var activeColor = Color(red: 0.25, green: 0.25, blue: 0.25, opacity: 1.0)
-  var inactiveColor = Color(red: 0.75, green: 0.75, blue: 0.75, opacity: 1.0)
-  var bgColor = Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 1.0)
-  var ctrlColor = Color(red: 0.25, green: 0.25, blue: 0.25, opacity: 1.0)
-
   var body: some View {
     ZStack {
-      bgColor
+      Theme.bgColor
         .ignoresSafeArea()
       VStack (spacing: 0) {
         HStack {
@@ -41,7 +36,7 @@ struct ContentView: View {
           }) {
             Image(systemName: (!self.playing || self.paused ? "play.fill" : "pause.fill"))
               .font(.system(size: 42))
-              .foregroundColor(ctrlColor)
+              .foregroundColor(Theme.activeCtrlColor)
           }
           Button(action: {
             self.st.resetTimer()
@@ -50,7 +45,7 @@ struct ContentView: View {
           }) {
             Image(systemName: ("stop.fill"))
               .font(.system(size: 42))
-              .foregroundColor(ctrlColor)
+              .foregroundColor(Theme.activeCtrlColor)
           }
           Button(action: {
             print("rest")
@@ -60,7 +55,7 @@ struct ContentView: View {
           }) {
             Image(systemName: ("circle.fill"))
               .font(.system(size: 42))
-              .foregroundColor(ctrlColor)
+              .foregroundColor(Theme.activeCtrlColor)
           }
           /*
           Button(action: {
@@ -73,7 +68,7 @@ struct ContentView: View {
           }) {
             Image(systemName: ("circle.fill"))
               .font(.system(size: 42))
-              .foregroundColor(ctrlColor)
+              .foregroundColor(Theme.activeCtrlColor)
           }
           Button(action: {
             do {
@@ -90,7 +85,7 @@ struct ContentView: View {
           }) {
             Image(systemName: ("circle"))
               .font(.system(size: 42))
-              .foregroundColor(ctrlColor)
+              .foregroundColor(Theme.activeCtrlColor)
           }
           */
         }
@@ -100,30 +95,30 @@ struct ContentView: View {
               Text(self.st.pad(v: self.st.h()))
                 //.fontWeight(.bold)
                 .font(.custom("SpaceMono-Bold", size: 108))
-                .foregroundColor(self.playing ? activeColor : inactiveColor)
+                .foregroundColor(self.playing ? Theme.activeCtrlColor : Theme.inactiveCtrlColor)
               Text("H")
                 .font(.custom("SpaceMono-Bold", size: 36))
-                .foregroundColor(activeColor)
+                .foregroundColor(Theme.activeCtrlColor)
                 .padding(.top, 36.0)
             }
             HStack {
               Text(self.st.pad(v: self.st.m()))
                 //.fontWeight(.bold)
                 .font(.custom("SpaceMono-Bold", size: 108))
-                .foregroundColor(self.playing ? activeColor : inactiveColor)
+                .foregroundColor(self.playing ? Theme.activeCtrlColor : Theme.inactiveCtrlColor)
               Text("M")
                 .font(.custom("SpaceMono-Bold", size: 36))
-                .foregroundColor(activeColor)
+                .foregroundColor(Theme.activeCtrlColor)
                 .padding(.top, 36.0)
             }
             HStack {
               Text(self.st.pad(v: self.st.s()))
                 //.fontWeight(.bold)
                 .font(.custom("SpaceMono-Bold", size: 108))
-                .foregroundColor(self.playing ? activeColor : inactiveColor)
+                .foregroundColor(self.playing ? Theme.activeCtrlColor : Theme.inactiveCtrlColor)
               Text("S")
                 .font(.custom("SpaceMono-Bold", size: 36))
-                .foregroundColor(activeColor)
+                .foregroundColor(Theme.activeCtrlColor)
                 .padding(.top, 36.0)
             }
 
@@ -131,55 +126,55 @@ struct ContentView: View {
               Button(action: {
                 activeExerciseIdx = 0
               }) {
-                ExerciseView(workout: self.workout, exIdx: 0, isActive: activeExerciseIdx == 0, persister: pers, activeColor: activeColor, inactiveColor: inactiveColor)
+                ExerciseView(workout: self.workout, exIdx: 0, isActive: activeExerciseIdx == 0, persister: pers)
               }
               .padding(.leading, 10)
               Button(action: {
                 activeExerciseIdx = 1
               }) {
-                ExerciseView(workout: self.workout, exIdx: 1, isActive: activeExerciseIdx == 1, persister: pers, activeColor: activeColor, inactiveColor: inactiveColor)
+                ExerciseView(workout: self.workout, exIdx: 1, isActive: activeExerciseIdx == 1, persister: pers)
               }
               .padding(.leading, 10)
               Button(action: {
                 activeExerciseIdx = 2
               }) {
-                ExerciseView(workout: self.workout, exIdx: 2, isActive: activeExerciseIdx == 2, persister: pers, activeColor: activeColor, inactiveColor: inactiveColor)
+                ExerciseView(workout: self.workout, exIdx: 2, isActive: activeExerciseIdx == 2, persister: pers)
               }
               .padding(.leading, 10)
               Button(action: {
                 activeExerciseIdx = 3
               }) {
-                ExerciseView(workout: self.workout, exIdx: 3, isActive: activeExerciseIdx == 3, persister: pers, activeColor: activeColor, inactiveColor: inactiveColor)
+                ExerciseView(workout: self.workout, exIdx: 3, isActive: activeExerciseIdx == 3, persister: pers)
               }
               .padding(.leading, 10)
               Button(action: {
                 activeExerciseIdx = 4
               }) {
-                ExerciseView(workout: self.workout, exIdx: 4, isActive: activeExerciseIdx == 4, persister: pers, activeColor: activeColor, inactiveColor: inactiveColor)
+                ExerciseView(workout: self.workout, exIdx: 4, isActive: activeExerciseIdx == 4, persister: pers)
               }
               .padding(.leading, 10)
               Button(action: {
                 activeExerciseIdx = 5
               }) {
-                ExerciseView(workout: self.workout, exIdx: 5, isActive: activeExerciseIdx == 5, persister: pers, activeColor: activeColor, inactiveColor: inactiveColor)
+                ExerciseView(workout: self.workout, exIdx: 5, isActive: activeExerciseIdx == 5, persister: pers)
               }
               .padding(.leading, 10)
               Button(action: {
                 activeExerciseIdx = 6
               }) {
-                ExerciseView(workout: self.workout, exIdx: 6, isActive: activeExerciseIdx == 6, persister: pers, activeColor: activeColor, inactiveColor: inactiveColor)
+                ExerciseView(workout: self.workout, exIdx: 6, isActive: activeExerciseIdx == 6, persister: pers)
               }
               .padding(.leading, 10)
               Button(action: {
                 activeExerciseIdx = 7
               }) {
-                ExerciseView(workout: self.workout, exIdx: 7, isActive: activeExerciseIdx == 7, persister: pers, activeColor: activeColor, inactiveColor: inactiveColor)
+                ExerciseView(workout: self.workout, exIdx: 7, isActive: activeExerciseIdx == 7, persister: pers)
               }
               .padding(.leading, 10)
               Button(action: {
                 activeExerciseIdx = 8
               }) {
-                ExerciseView(workout: self.workout, exIdx: 8, isActive: activeExerciseIdx == 8, persister: pers, activeColor: activeColor, inactiveColor: inactiveColor)
+                ExerciseView(workout: self.workout, exIdx: 8, isActive: activeExerciseIdx == 8, persister: pers)
               }
               .padding(.leading, 10)
             }

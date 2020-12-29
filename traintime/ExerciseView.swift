@@ -13,10 +13,6 @@ struct ExerciseView: View {
   var exIdx: Int
   var isActive: Bool
   var persister: Persister
-  var activeColor: Color
-  var inactiveColor: Color
-  var activeExerciseColor = Color(red: 0.75, green: 0.75, blue: 0.75, opacity: 1.0)
-//  @State var activeExercise = false
   static let maxReps = 10
   static let minReps = 1
 
@@ -28,42 +24,36 @@ struct ExerciseView: View {
       }) {
         Text(String(self.workout.exercises[exIdx].reps1))
           .font(.custom("SpaceMono-Bold", size: 24))
-          .foregroundColor(activeColor)
+          .foregroundColor(Theme.activeCtrlColor)
       }
       Text("/")
         .font(.custom("SpaceMono-Bold", size: 24))
-        .foregroundColor(activeColor)
+        .foregroundColor(Theme.activeCtrlColor)
       Button(action: {
         self.workout.exercises[exIdx].reps2 = (self.workout.exercises[exIdx].reps2 >= ExerciseView.maxReps ? ExerciseView.minReps : 1 + self.workout.exercises[exIdx].reps2)
         self.persister.write(filename: self.persister.getFilename(), self.workout)
       }) {
         Text(String(self.workout.exercises[exIdx].reps2))
           .font(.custom("SpaceMono-Bold", size: 24))
-          .foregroundColor(activeColor)
+          .foregroundColor(Theme.activeCtrlColor)
       }
       Text("/")
         .font(.custom("SpaceMono-Bold", size: 24))
-        .foregroundColor(activeColor)
+        .foregroundColor(Theme.activeCtrlColor)
       Button(action: {
         self.workout.exercises[exIdx].reps3 = (self.workout.exercises[exIdx].reps3 >= ExerciseView.maxReps ? ExerciseView.minReps : 1 + self.workout.exercises[exIdx].reps3)
         self.persister.write(filename: self.persister.getFilename(), self.workout)
       }) {
         Text(String(self.workout.exercises[exIdx].reps3))
           .font(.custom("SpaceMono-Bold", size: 24))
-          .foregroundColor(activeColor)
+          .foregroundColor(Theme.activeCtrlColor)
       }
-      /*
-      Button(action: {
-        self.activeExercise = !self.activeExercise
-      }) {
-      */
-        Text(self.workout.exercises[exIdx].description)
-          .font(.custom("SpaceMono-Bold", size: 24))
-          .foregroundColor(activeColor)
-//      }
+      Text(self.workout.exercises[exIdx].description)
+        .font(.custom("SpaceMono-Bold", size: 24))
+        .foregroundColor(Theme.activeCtrlColor)
     }
     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-    .background(self.isActive ? activeExerciseColor : Color.white)
+    .background(self.isActive ? Theme.highlightedBgColor : Theme.bgColor)
   }
 }
 
