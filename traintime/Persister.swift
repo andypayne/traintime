@@ -86,7 +86,9 @@ class Persister: ObservableObject {
     }
     guard self.fileManager.fileExists(atPath: url.path) else {
       print("Error - the file does not exist")
-      fatalError("The file does not exist")
+      let decoder = JSONDecoder()
+      let decData = try decoder.decode(type, from: Data())
+      return decData
     }
     if let encData = FileManager.default.contents(atPath: url.path) {
       let decoder = JSONDecoder()
