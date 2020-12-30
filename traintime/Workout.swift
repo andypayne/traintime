@@ -9,14 +9,16 @@ import Foundation
 
 class Workout: ObservableObject, Codable {
   enum CodingKeys: CodingKey {
-      case updatedAt, elTime, exercises
+      case ver, updatedAt, elTime, exercises
   }
 
+  @Published var ver: String
   @Published var updatedAt: Double
   @Published var elTime: Int
   @Published var exercises = [Exercise]()
 
   init() {
+    ver = "0.1.1"
     updatedAt = Date().timeIntervalSince1970
     elTime = 0
     exercises.append(Exercise(reps1: 1, reps2: 2, reps3: 1, description: "pull-ups"))
@@ -32,6 +34,7 @@ class Workout: ObservableObject, Codable {
 
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
+    ver = try container.decode(String.self, forKey: .ver)
     updatedAt = try container.decode(Double.self, forKey: .updatedAt)
     elTime = try container.decode(Int.self, forKey: .elTime)
     exercises = try container.decode([Exercise].self, forKey: .exercises)
@@ -39,6 +42,7 @@ class Workout: ObservableObject, Codable {
 
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(ver, forKey: .ver)
     try container.encode(updatedAt, forKey: .updatedAt)
     try container.encode(elTime, forKey: .elTime)
     try container.encode(exercises, forKey: .exercises)
