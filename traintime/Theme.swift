@@ -35,12 +35,13 @@ struct Theme {
   static let dkGreenColor = Color(red: 0.157, green: 0.251, blue: 0.165)
   static let medGreenColor = Color(red: 0.247, green: 0.353, blue: 0.259)
   static let ltGreenColor = Color(red: 0.310, green: 0.424, blue: 0.322)
+  static let ltGreenColor2 = Color(red: 0.490, green: 0.631, blue: 0.502)
   static let ltBlueColor = Color(red: 0.765, green: 0.890, blue: 0.847)
   static let medBlueColor = Color(red: 0.675, green: 0.812, blue: 0.761)
   static let dkBlueColor = Color(red: 0.420, green: 0.580, blue: 0.514)
 
   static let activeCtrlColor = dkGreenColor
-  static let inactiveCtrlColor = ltGreenColor
+  static let inactiveCtrlColor = ltGreenColor2
   static let bgColor = ltBlueColor
   static let highlightedBgColor = medBlueColor
 }
