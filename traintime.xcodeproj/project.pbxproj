@@ -38,6 +38,7 @@
 		A15CB9012599832500034CE7 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15CB8FF2599832500034CE7 /* Exercise.swift */; };
 		A15CB9022599832500034CE7 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15CB8FF2599832500034CE7 /* Exercise.swift */; };
 		A1CE851A259B916800D1CBEB /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE8519259B916800D1CBEB /* Theme.swift */; };
+		A1CE8525259CDC8A00D1CBEB /* SleepControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE8524259CDC8A00D1CBEB /* SleepControl.swift */; };
 		A1EB0D0825980D1D001085FE /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EB0D0725980D1D001085FE /* ExerciseView.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +83,7 @@
 		A15CB8F82599666400034CE7 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		A15CB8FF2599832500034CE7 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		A1CE8519259B916800D1CBEB /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		A1CE8524259CDC8A00D1CBEB /* SleepControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepControl.swift; sourceTree = "<group>"; };
 		A1EB0D0725980D1D001085FE /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +140,7 @@
 				A144581F2596B75000B99FDC /* SimpleTimer.swift */,
 				A14457BC2596971C00B99FDC /* SceneDelegate.swift */,
 				A14457BE2596971C00B99FDC /* ContentView.swift */,
+				A1CE8524259CDC8A00D1CBEB /* SleepControl.swift */,
 				A15CB8F125994DA200034CE7 /* Persister.swift */,
 				A1EB0D0725980D1D001085FE /* ExerciseView.swift */,
 				A1CE8519259B916800D1CBEB /* Theme.swift */,
@@ -331,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1CE851A259B916800D1CBEB /* Theme.swift in Sources */,
+				A1CE8525259CDC8A00D1CBEB /* SleepControl.swift in Sources */,
 				A14457BB2596971C00B99FDC /* AppDelegate.swift in Sources */,
 				A15CB9002599832500034CE7 /* Exercise.swift in Sources */,
 				A14457BD2596971C00B99FDC /* SceneDelegate.swift in Sources */,

@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-  //@State private var
   @ObservedObject var st = SimpleTimer()
   @State private var playing = false
   @State private var paused = false
   @State private var resting = false
   @State var activeExerciseIdx = -1
   @State var pers: Persister = Persister()
-  //@State private var workout: Workout = Workout()
   @ObservedObject var workout: Workout = Workout()
 
   var body: some View {
@@ -29,9 +27,11 @@ struct ContentView: View {
               self.st.startTimer()
               self.playing = true
               self.paused = false
+              SleepControl.disableSleep()
             } else {
               self.paused = true
               self.st.pauseTimer()
+              SleepControl.enableSleep()
             }
           }) {
             Image(systemName: (!self.playing || self.paused ? "play.fill" : "pause.fill"))
@@ -52,6 +52,7 @@ struct ContentView: View {
             self.resting = true
             self.workout.elTime = st.elTime
             pers.write(filename: pers.getFilename(), workout)
+            SleepControl.enableSleep()
           }) {
             Image(systemName: ("circle.fill"))
               .font(.system(size: 42))
