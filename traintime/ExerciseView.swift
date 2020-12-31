@@ -20,7 +20,7 @@ struct ExerciseView: View {
     HStack(spacing: 10) {
       Button(action: {
         self.workout.exercises[exIdx].reps1 = (self.workout.exercises[exIdx].reps1 >= ExerciseView.maxReps ? ExerciseView.minReps : 1 + self.workout.exercises[exIdx].reps1)
-        self.persister.write(filename: self.persister.getFilename(), self.workout)
+        self.persister.write(filename: self.persister.getDefaultFilename(), self.workout)
       }) {
         Text(String(self.workout.exercises[exIdx].reps1))
           .font(.custom("SpaceMono-Bold", size: 24))
@@ -31,7 +31,7 @@ struct ExerciseView: View {
         .foregroundColor(Theme.activeCtrlColor)
       Button(action: {
         self.workout.exercises[exIdx].reps2 = (self.workout.exercises[exIdx].reps2 >= ExerciseView.maxReps ? ExerciseView.minReps : 1 + self.workout.exercises[exIdx].reps2)
-        self.persister.write(filename: self.persister.getFilename(), self.workout)
+        self.persister.write(filename: self.persister.getDefaultFilename(), self.workout)
       }) {
         Text(String(self.workout.exercises[exIdx].reps2))
           .font(.custom("SpaceMono-Bold", size: 24))
@@ -42,7 +42,7 @@ struct ExerciseView: View {
         .foregroundColor(Theme.activeCtrlColor)
       Button(action: {
         self.workout.exercises[exIdx].reps3 = (self.workout.exercises[exIdx].reps3 >= ExerciseView.maxReps ? ExerciseView.minReps : 1 + self.workout.exercises[exIdx].reps3)
-        self.persister.write(filename: self.persister.getFilename(), self.workout)
+        self.persister.write(filename: self.persister.getDefaultFilename(), self.workout)
       }) {
         Text(String(self.workout.exercises[exIdx].reps3))
           .font(.custom("SpaceMono-Bold", size: 24))

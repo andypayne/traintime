@@ -17,6 +17,7 @@ struct ContentView: View {
   @ObservedObject var workout: Workout = Workout()
 
   var body: some View {
+    NavigationView {
     ZStack {
       Theme.bgColor
         .ignoresSafeArea()
@@ -38,6 +39,7 @@ struct ContentView: View {
               .font(.system(size: 42))
               .foregroundColor(Theme.activeCtrlColor)
           }
+          /*
           Button(action: {
             self.st.resetTimer()
             self.paused = false
@@ -51,21 +53,56 @@ struct ContentView: View {
             print("rest")
             self.resting = true
             self.workout.elTime = st.elTime
-            pers.write(filename: pers.getFilename(), workout)
+            pers.write(filename: pers.getDefaultFilename(), workout)
             SleepControl.enableSleep()
           }) {
             Image(systemName: ("circle.fill"))
               .font(.system(size: 42))
               .foregroundColor(Theme.activeCtrlColor)
           }
+           */
+          Button(action: {
+            if self.paused || !self.playing {
+              print("archive")
+              self.workout.elTime = st.elTime
+              self.workout.updatedAt = Date().timeIntervalSince1970
+              pers.write(filename: pers.getArchiveFilename(), workout)
+              self.st.resetTimer()
+              self.workout.elTime = st.elTime
+            }
+          }) {
+            Image(systemName: ("arrow.down.circle.fill"))
+              .font(.system(size: 42))
+              .foregroundColor((self.paused || !self.playing) ? Theme.activeCtrlColor : Theme.inactiveCtrlColor)
+          }
+          NavigationLink(destination: ArchiveView()) {
+            Image(systemName: ("doc.text"))
+              .font(.system(size: 42))
+              .foregroundColor((self.paused || !self.playing) ? Theme.activeCtrlColor : Theme.inactiveCtrlColor)
+          }
+          /*
+          Button(action: {
+            if self.paused || !self.playing {
+              print("view logs")
+              let files = pers.listFiles()
+              print("files:", files)
+              
+            }
+          }) {
+            Image(systemName: ("doc.text"))
+              .font(.system(size: 42))
+              .foregroundColor((self.paused || !self.playing) ? Theme.activeCtrlColor : Theme.inactiveCtrlColor)
+          }
+          */
+
           /*
           Button(action: {
             print("rest")
             self.resting = true
-            //let res = pers.read(filename: pers.getFilename())
+            //let res = pers.read(filename: pers.getDefaultFilename())
             //print("Result: ", res)
-`            self.workout.elTime = st.elTime
-            pers.write(filename: pers.getFilename(), workout)
+            self.workout.elTime = st.elTime
+            pers.write(filename: pers.getDefaultFilename(), workout)
           }) {
             Image(systemName: ("circle.fill"))
               .font(.system(size: 42))
@@ -73,9 +110,7 @@ struct ContentView: View {
           }
           Button(action: {
             do {
-              //self.$workout = try pers.read(filename: pers.getFilename(), as: Workout.self)
-              let tmpWorkout = try pers.read(filename: pers.getFilename(), as: Workout.self)
-              //self.workout = tmpWorkout
+              let tmpWorkout = try pers.read(filename: pers.getDefaultFilename(), as: Workout.self)
               self.workout.elTime = tmpWorkout.elTime
               st.elTime = self.workout.elTime
               self.workout.updatedAt = tmpWorkout.updatedAt
@@ -184,7 +219,7 @@ struct ContentView: View {
       }
     }.onAppear {
       do {
-        let tmpWorkout = try pers.read(filename: pers.getFilename(), as: Workout.self)
+        let tmpWorkout = try pers.read(filename: pers.getDefaultFilename(), as: Workout.self)
         self.workout.elTime = tmpWorkout.elTime
         st.elTime = self.workout.elTime
         self.workout.updatedAt = tmpWorkout.updatedAt
@@ -193,6 +228,7 @@ struct ContentView: View {
         print("Caught error")
       }
     }
+  }
   }
 }
 

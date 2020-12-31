@@ -7,6 +7,65 @@
 
 import Foundation
 
+func readWorkoutFiles(pers: Persister, filename: String) -> Workout {
+  do {
+    let tmpWorkout = try pers.read(filename: filename, as: Workout.self)
+    //Text(String(tmpWorkout.elTime))
+    return tmpWorkout
+  } catch {
+    return Workout()
+  }
+}
+
+func exerciseToStr(exercise: Exercise) -> String {
+  return String(exercise.reps1) + " / " + String(exercise.reps2) + " / " + String(exercise.reps3) + " " + exercise.description
+}
+
+func exerciseToJsonStr(exercise: Exercise) -> String {
+  return """
+{
+  "reps1": "\(String(exercise.reps1))",
+  "reps2": "\(String(exercise.reps2))",
+  "reps3": "\(String(exercise.reps3))",
+  "description": "\(exercise.description)"
+}
+"""
+}
+
+func workoutsToStr(pers: Persister) -> String {
+  return pers.listFiles().map {
+    let archWorkout = readWorkoutFiles(pers: pers, filename: $0.lastPathComponent)
+    let ts = Date(timeIntervalSince1970: archWorkout.updatedAt)
+    return timestampToStr(ts: ts) +
+    "\n" +
+    "Duration: " + String(archWorkout.elTime) + " seconds" +
+    "\n" +
+    archWorkout.exercises.map { exer in
+      return exerciseToStr(exercise: exer)
+    }.joined(separator: "\n")
+  }.joined(separator: "\n")
+}
+
+func workoutsToJsonStr(pers: Persister) -> String {
+  return "{\n\"workouts\": [\n" + pers.listFiles().map {
+    let archWorkout = readWorkoutFiles(pers: pers, filename: $0.lastPathComponent)
+    let ts = Date(timeIntervalSince1970: archWorkout.updatedAt)
+    let exercisesStr = archWorkout.exercises.map { exer in
+      return exerciseToJsonStr(exercise: exer)
+    }.joined(separator: ",\n")
+    return """
+{
+  "updatedAt": "\(timestampToStr(ts: ts))",
+  "duration": "\(String(archWorkout.elTime)) seconds",
+  "exercises": [
+    \(exercisesStr)
+  ]
+}
+"""
+  }.joined(separator: ",\n") + "]\n}"
+}
+
+
 class Workout: ObservableObject, Codable {
   enum CodingKeys: CodingKey {
       case ver, updatedAt, elTime, exercises
