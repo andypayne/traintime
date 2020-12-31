@@ -1,10 +1,3 @@
-//
-//  traintimeUITests.swift
-//  traintimeUITests
-//
-//  Created by Andy on 12/25/20.
-//
-
 import XCTest
 
 class traintimeUITests: XCTestCase {

@@ -1,10 +1,3 @@
-//
-//  Theme.swift
-//  traintime
-//
-//  Created by Andy on 12/29/20.
-//
-
 import SwiftUI
 
 struct Theme {

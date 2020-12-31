@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  traintime
-//
-//  Created by Andy on 12/25/20.
-//
-
 import SwiftUI
 
 struct ContentView: View {

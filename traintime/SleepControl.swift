@@ -1,11 +1,4 @@
-//
-//  SleepControl.swift
-//  traintime
-//
-//  Created by Andy on 12/30/20.
-//
-
-import Foundation
+simport Foundation
 import UIKit
 
 struct SleepControl {

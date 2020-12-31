@@ -1,10 +1,3 @@
-//
-//  traintimeTests.swift
-//  traintimeTests
-//
-//  Created by Andy on 12/25/20.
-//
-
 import XCTest
 @testable import traintime
 

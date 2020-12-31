@@ -1,10 +1,3 @@
-//
-//  ExerciseView.swift
-//  traintime
-//
-//  Created by Andy on 12/26/20.
-//
-
 import SwiftUI
 
 struct ExerciseView: View {

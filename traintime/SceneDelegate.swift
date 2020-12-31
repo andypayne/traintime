@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  traintime
-//
-//  Created by Andy on 12/25/20.
-//
-
 import UIKit
 import SwiftUI
 

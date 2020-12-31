@@ -1,16 +1,8 @@
-//
-//  Workout.swift
-//  traintime
-//
-//  Created by Andy on 12/27/20.
-//
-
 import Foundation
 
 func readWorkoutFiles(pers: Persister, filename: String) -> Workout {
   do {
     let tmpWorkout = try pers.read(filename: filename, as: Workout.self)
-    //Text(String(tmpWorkout.elTime))
     return tmpWorkout
   } catch {
     return Workout()

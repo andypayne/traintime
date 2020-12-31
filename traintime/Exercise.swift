@@ -1,10 +1,3 @@
-//
-//  Exercise.swift
-//  traintime
-//
-//  Created by Andy on 12/27/20.
-//
-
 import Foundation
 
 struct Exercise: Codable, Hashable {
