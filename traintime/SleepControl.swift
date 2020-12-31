@@ -1,4 +1,4 @@
-simport Foundation
+import Foundation
 import UIKit
 
 struct SleepControl {
