@@ -10,7 +10,6 @@ struct ContentView: View {
   @ObservedObject var workout: Workout = Workout()
 
   // TODO:
-  // - Remove the top margin
   // - Change the scrolling to be just the exercises, possibly in a new view (option)
   // - Add deletion of workouts
   // - Add sharing of individual workouts
@@ -58,38 +57,41 @@ struct ContentView: View {
                 .foregroundColor((self.paused || !self.playing) ? Theme.activeCtrlColor : Theme.inactiveCtrlColor)
             }
           }
-          
+
           ScrollView {
             VStack (spacing: 0) {
               HStack {
                 Text(self.st.pad(v: self.st.h()))
                   .font(.custom("SpaceMono-Bold", size: 108))
                   .foregroundColor(self.playing ? Theme.activeCtrlColor : Theme.inactiveCtrlColor)
+                  .padding(.vertical, -28)
                 Text("H")
                   .font(.custom("SpaceMono-Bold", size: 36))
                   .foregroundColor(Theme.activeCtrlColor)
-                  .padding(.top, 36.0)
-              }
+                  .padding(0)
+              }.padding(0)
               HStack {
                 Text(self.st.pad(v: self.st.m()))
                   .font(.custom("SpaceMono-Bold", size: 108))
                   .foregroundColor(self.playing ? Theme.activeCtrlColor : Theme.inactiveCtrlColor)
+                  .padding(.vertical, -28)
                 Text("M")
                   .font(.custom("SpaceMono-Bold", size: 36))
                   .foregroundColor(Theme.activeCtrlColor)
-                  .padding(.top, 36.0)
-              }
+                  .padding(0)
+              }.padding(0)
               HStack {
                 Text(self.st.pad(v: self.st.s()))
                   .font(.custom("SpaceMono-Bold", size: 108))
                   .foregroundColor(self.playing ? Theme.activeCtrlColor : Theme.inactiveCtrlColor)
+                  .padding(.vertical, -28)
                 Text("S")
                   .font(.custom("SpaceMono-Bold", size: 36))
                   .foregroundColor(Theme.activeCtrlColor)
-                  .padding(.top, 36.0)
-              }
+                  .padding(0)
+              }.padding(0)
 
-              VStack(alignment: .leading, spacing: 20) {
+              VStack(alignment: .leading, spacing: 18) {
                 Button(action: {
                   activeExerciseIdx = 0
                 }) {
@@ -146,6 +148,7 @@ struct ContentView: View {
                 .padding(.leading, 10)
               }
             }
+            .padding(.vertical, 0.0)
           }
         }
 
