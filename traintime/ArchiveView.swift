@@ -19,6 +19,7 @@ struct ArchiveView: View {
         Button(action: {
           let shareData = workoutsToJsonStr(pers: pers)
           let av = UIActivityViewController(activityItems: [shareData], applicationActivities: nil)
+          av.setValue("Workouts", forKey: "Subject")
           UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
         }) {
           Image(systemName: ("square.and.arrow.up"))
@@ -38,6 +39,7 @@ struct ArchiveView: View {
                 Button(action: {
                   let shareData = workoutToJsonStr(pers: pers, fileUrl: fn)
                   let av = UIActivityViewController(activityItems: [shareData], applicationActivities: nil)
+                  av.setValue("Workout " + timestampToStr(ts: ts), forKey: "Subject")
                   UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
                 }) {
                   Image(systemName: ("square.and.arrow.up"))
