@@ -9,6 +9,7 @@ func timestampToStr(ts: Date) -> String {
 
 struct ArchiveView: View {
   @State var pers: Persister = Persister()
+  @State private var showingAlert = false
 
   var body: some View {
     ZStack {
@@ -33,6 +34,19 @@ struct ArchiveView: View {
               Text(timestampToStr(ts: ts))
                 .font(.custom("SpaceMono-Bold", size: 24))
                 .foregroundColor(Theme.activeCtrlColor)
+              Button(action: {
+                self.showingAlert = true
+              }) {
+                Image(systemName: ("trash"))
+                    .font(.system(size: 24))
+                  .foregroundColor(Theme.activeCtrlColor)
+              }
+              .alert(isPresented: $showingAlert, content: { Alert(title: Text("Delete this workout?"), primaryButton: .destructive(Text("Delete")) {
+                  print("Deleting ", fn.lastPathComponent)
+                  pers.removeFile(fileUrl: fn)
+                },
+                secondaryButton: .cancel()
+              ) })
               Text("Duration: " + String(archWorkout.elTime) + " seconds")
                 .font(.custom("SpaceMono-Bold", size: 18))
                 .foregroundColor(Theme.activeCtrlColor)

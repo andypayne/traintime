@@ -92,4 +92,13 @@ class Persister: ObservableObject {
       $0.lastPathComponent.hasPrefix("train_log_")
     }.map { $0.absoluteString } ?? []
   }
+
+  func removeFile(fileUrl: URL) {
+    do {
+      try self.fileManager.removeItem(at: fileUrl)
+    } catch let error as NSError {
+      print("Error deleting workout file: \(error.domain)")
+    }
+  }
+
 }

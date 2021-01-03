@@ -10,7 +10,6 @@ struct ContentView: View {
   @ObservedObject var workout: Workout = Workout()
 
   // TODO:
-  // - Add deletion of workouts
   // - Add sharing of individual workouts
 
   var body: some View {
