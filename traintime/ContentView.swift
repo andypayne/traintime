@@ -9,9 +9,6 @@ struct ContentView: View {
   @State var pers: Persister = Persister()
   @ObservedObject var workout: Workout = Workout()
 
-  // TODO:
-  // - Add sharing of individual workouts
-
   var body: some View {
     NavigationView {
       ZStack {

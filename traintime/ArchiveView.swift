@@ -29,24 +29,35 @@ struct ArchiveView: View {
         ScrollView {
           VStack (alignment: .leading, spacing: 10) {
             ForEach(pers.listFiles(), id: \.self) { fn in
-              let archWorkout = readWorkoutFiles(pers: pers, filename: fn.lastPathComponent)
+              let archWorkout = readWorkoutFile(pers: pers, filename: fn.lastPathComponent)
               let ts = Date(timeIntervalSince1970: archWorkout.updatedAt)
               Text(timestampToStr(ts: ts))
                 .font(.custom("SpaceMono-Bold", size: 24))
                 .foregroundColor(Theme.activeCtrlColor)
-              Button(action: {
-                self.showingAlert = true
-              }) {
-                Image(systemName: ("trash"))
-                    .font(.system(size: 24))
-                  .foregroundColor(Theme.activeCtrlColor)
+              HStack {
+                Button(action: {
+                  let shareData = workoutToJsonStr(pers: pers, fileUrl: fn)
+                  let av = UIActivityViewController(activityItems: [shareData], applicationActivities: nil)
+                  UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
+                }) {
+                  Image(systemName: ("square.and.arrow.up"))
+                      .font(.system(size: 24))
+                    .foregroundColor(Theme.activeCtrlColor)
+                }
+                Button(action: {
+                  self.showingAlert = true
+                }) {
+                  Image(systemName: ("trash"))
+                      .font(.system(size: 24))
+                    .foregroundColor(Theme.activeCtrlColor)
+                }
+                .alert(isPresented: $showingAlert, content: { Alert(title: Text("Delete this workout?"), primaryButton: .destructive(Text("Delete")) {
+                    print("Deleting ", fn.lastPathComponent)
+                    pers.removeFile(fileUrl: fn)
+                  },
+                  secondaryButton: .cancel()
+                ) })
               }
-              .alert(isPresented: $showingAlert, content: { Alert(title: Text("Delete this workout?"), primaryButton: .destructive(Text("Delete")) {
-                  print("Deleting ", fn.lastPathComponent)
-                  pers.removeFile(fileUrl: fn)
-                },
-                secondaryButton: .cancel()
-              ) })
               Text("Duration: " + String(archWorkout.elTime) + " seconds")
                 .font(.custom("SpaceMono-Bold", size: 18))
                 .foregroundColor(Theme.activeCtrlColor)

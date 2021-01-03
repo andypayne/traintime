@@ -1,6 +1,6 @@
 import Foundation
 
-func readWorkoutFiles(pers: Persister, filename: String) -> Workout {
+func readWorkoutFile(pers: Persister, filename: String) -> Workout {
   do {
     let tmpWorkout = try pers.read(filename: filename, as: Workout.self)
     return tmpWorkout
@@ -26,7 +26,7 @@ func exerciseToJsonStr(exercise: Exercise) -> String {
 
 func workoutsToStr(pers: Persister) -> String {
   return pers.listFiles().map {
-    let archWorkout = readWorkoutFiles(pers: pers, filename: $0.lastPathComponent)
+    let archWorkout = readWorkoutFile(pers: pers, filename: $0.lastPathComponent)
     let ts = Date(timeIntervalSince1970: archWorkout.updatedAt)
     return timestampToStr(ts: ts) +
     "\n" +
@@ -40,7 +40,7 @@ func workoutsToStr(pers: Persister) -> String {
 
 func workoutsToJsonStr(pers: Persister) -> String {
   return "{\n\"workouts\": [\n" + pers.listFiles().map {
-    let archWorkout = readWorkoutFiles(pers: pers, filename: $0.lastPathComponent)
+    let archWorkout = readWorkoutFile(pers: pers, filename: $0.lastPathComponent)
     let ts = Date(timeIntervalSince1970: archWorkout.updatedAt)
     let exercisesStr = archWorkout.exercises.map { exer in
       return exerciseToJsonStr(exercise: exer)
@@ -55,6 +55,23 @@ func workoutsToJsonStr(pers: Persister) -> String {
 }
 """
   }.joined(separator: ",\n") + "]\n}"
+}
+
+func workoutToJsonStr(pers: Persister, fileUrl: URL) -> String {
+  let archWorkout = readWorkoutFile(pers: pers, filename: fileUrl.lastPathComponent)
+  let ts = Date(timeIntervalSince1970: archWorkout.updatedAt)
+  let exercisesStr = archWorkout.exercises.map { exer in
+    return exerciseToJsonStr(exercise: exer)
+  }.joined(separator: ",\n")
+  return """
+{
+  "updatedAt": "\(timestampToStr(ts: ts))",
+  "duration": "\(String(archWorkout.elTime)) seconds",
+  "exercises": [
+    \(exercisesStr)
+  ]
+}
+"""
 }
 
 
