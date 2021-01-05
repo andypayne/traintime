@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ContentView: View {
+  // TODO:
+  // Don't reset the timer on nav menu transition
   @ObservedObject var st = SimpleTimer()
   @State private var playing = false
   @State private var paused = false
@@ -8,6 +10,7 @@ struct ContentView: View {
   @State var activeExerciseIdx = -1
   @State var pers: Persister = Persister()
   @ObservedObject var workout: Workout = Workout()
+  @State var isNavHidden = true
 
   var body: some View {
     NavigationView {
@@ -46,10 +49,15 @@ struct ContentView: View {
                 .font(.system(size: 42))
                 .foregroundColor((self.paused || !self.playing) ? Theme.activeCtrlColor : Theme.inactiveCtrlColor)
             }
-            NavigationLink(destination: ArchiveView()) {
+            NavigationLink(destination: ArchiveView().onAppear {
+              self.isNavHidden = false
+            }.onDisappear {
+              self.isNavHidden = true
+            }
+            ) {
               Image(systemName: ("doc.text"))
                 .font(.system(size: 42))
-                .foregroundColor((self.paused || !self.playing) ? Theme.activeCtrlColor : Theme.inactiveCtrlColor)
+                .foregroundColor(Theme.activeCtrlColor)
             }
           }
 
@@ -159,7 +167,7 @@ struct ContentView: View {
         }
       }
       .navigationBarTitle("", displayMode: .inline)
-      .navigationBarHidden(true)
+      .navigationBarHidden(self.isNavHidden)
     }
   }
 }
