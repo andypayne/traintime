@@ -10,7 +10,8 @@ func readWorkoutFile(pers: Persister, filename: String) -> Workout {
 }
 
 func exerciseToStr(exercise: Exercise) -> String {
-  return String(exercise.reps1) + " / " + String(exercise.reps2) + " / " + String(exercise.reps3) + " " + exercise.description
+  let note = (exercise.note ?? "").isEmpty ? "" : ("\n" + exercise.note!)
+  return String(exercise.reps1) + " / " + String(exercise.reps2) + " / " + String(exercise.reps3) + " " + exercise.description + note
 }
 
 func exerciseToJsonStr(exercise: Exercise) -> String {
@@ -19,7 +20,8 @@ func exerciseToJsonStr(exercise: Exercise) -> String {
   "reps1": "\(String(exercise.reps1))",
   "reps2": "\(String(exercise.reps2))",
   "reps3": "\(String(exercise.reps3))",
-  "description": "\(exercise.description)"
+  "description": "\(exercise.description)",
+  "note": "\(exercise.note ?? "")"
 }
 """
 }
