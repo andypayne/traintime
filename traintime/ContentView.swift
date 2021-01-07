@@ -1,9 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-  // TODO:
-  // Don't reset the timer on nav menu transition
-  @ObservedObject var st = SimpleTimer()
+  @ObservedObject var st: SimpleTimer
   @State private var playing = false
   @State private var paused = false
   @State private var resting = false
@@ -159,7 +157,6 @@ struct ContentView: View {
         do {
           let tmpWorkout = try pers.read(filename: pers.getDefaultFilename(), as: Workout.self)
           self.workout.elTime = tmpWorkout.elTime
-          st.elTime = self.workout.elTime
           self.workout.updatedAt = tmpWorkout.updatedAt
           self.workout.exercises = tmpWorkout.exercises
         } catch {
@@ -174,7 +171,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    ContentView(st: SimpleTimer())
       
   }
 }
