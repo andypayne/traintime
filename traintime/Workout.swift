@@ -94,7 +94,7 @@ class Workout: ObservableObject, Codable {
     exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "pull-ups"))
     exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "squats"))
     exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "dips"))
-    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "single leg RDL"))
+    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "hinges"))
     exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "rows"))
     exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "push-ups"))
     exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "anti-extension"))
