@@ -8,7 +8,7 @@ Traintime is a simple iOS app to time and track workouts. Currently it's focused
 ## Features
 
 - Large display timer
-- Exercise list from the Recommended Routine
+- Exercise list from the [Recommended Routine](https://www.reddit.com/r/bodyweightfitness/wiki/kb/recommended_routine)
   - pull-ups
   - squats
   - dips
