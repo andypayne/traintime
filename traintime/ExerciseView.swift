@@ -13,8 +13,8 @@ struct ExerciseView: View {
   @State private var showingAlert = false
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 8) {
-      HStack(spacing: 10) {
+    VStack(alignment: .leading, spacing: 4) {
+      HStack(spacing: 8) {
         Button(action: {
           self.workout.exercises[exIdx].reps1 = (self.workout.exercises[exIdx].reps1 >= ExerciseView.maxReps ? ExerciseView.minReps : 1 + self.workout.exercises[exIdx].reps1)
           self.persister.write(filename: self.persister.getDefaultFilename(), self.workout)
@@ -49,18 +49,19 @@ struct ExerciseView: View {
           .font(.custom("SpaceMono-Bold", size: 24))
           .foregroundColor(Theme.activeCtrlColor)
       }
-      .padding(.top, 5)
+      .padding(.top, 18)
       .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
       .background(self.isActive ? Theme.highlightedBgColor : Theme.bgColor)
-      HStack(spacing: 10) {
-        Button(action: {
-          addNote = true
-        }) {
-          Image(systemName: ("square.and.pencil"))
-            .font(.system(size: 24))
-            .foregroundColor(Theme.activeCtrlColor)
-        }
-        if addNote {
+      HStack {
+        if !addNote {
+          Button(action: {
+            addNote = true
+          }) {
+            Image(systemName: ("square.and.pencil"))
+              .font(.system(size: 24))
+              .foregroundColor(Theme.activeCtrlColor)
+          }
+        } else {
           Button(action: {
             self.showingAlert = true
           }) {
@@ -75,10 +76,8 @@ struct ExerciseView: View {
             },
             secondaryButton: .cancel()
           ) })
-        } else {
-          EmptyView()
         }
-      }.padding(.top, 5)
+      }.padding(.top, 6)
       if addNote {
         TextField("add a note",
           text: self.$exerNote,
@@ -94,7 +93,7 @@ struct ExerciseView: View {
       } else {
         EmptyView()
       }
-    }.padding(.top, 20)
+    }.padding(.top, 14)
   }
 }
 
