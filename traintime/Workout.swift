@@ -108,6 +108,12 @@ class Workout: ObservableObject, Codable {
     updatedAt = try container.decode(Double.self, forKey: .updatedAt)
     elTime = try container.decode(Int.self, forKey: .elTime)
     exercises = try container.decode([Exercise].self, forKey: .exercises)
+    exercises = exercises.map { exer in
+      if exer.description == "single leg RDL" {
+        return Exercise(reps1: exer.reps1, reps2: exer.reps2, reps3: exer.reps3, description: "hinges")
+      }
+      return exer
+    }
   }
 
   func encode(to encoder: Encoder) throws {
