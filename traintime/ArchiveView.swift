@@ -35,7 +35,8 @@ struct ArchiveView: View {
               Text(timestampToStr(ts: ts))
                 .font(.custom("SpaceMono-Bold", size: 24))
                 .foregroundColor(Theme.activeCtrlColor)
-              HStack {
+              VStack (alignment: .leading, spacing: 10) {
+              HStack (spacing: 10) {
                 Button(action: {
                   let shareData = workoutToJsonStr(pers: pers, fileUrl: fn)
                   let av = UIActivityViewController(activityItems: [shareData], applicationActivities: nil)
@@ -60,6 +61,8 @@ struct ArchiveView: View {
                   secondaryButton: .cancel()
                 ) })
               }
+              .padding(.leading, 10)
+
               Text("Duration: " + String(archWorkout.elTime) + " seconds")
                 .font(.custom("SpaceMono-Bold", size: 18))
                 .foregroundColor(Theme.activeCtrlColor)
@@ -67,6 +70,8 @@ struct ArchiveView: View {
                 Text(exerciseToStr(exercise: exercise))
                   .font(.custom("SpaceMono-Bold", size: 18))
                   .foregroundColor(Theme.activeCtrlColor)
+                  .padding(.leading, 10)
+              }
               }
             }
           }
