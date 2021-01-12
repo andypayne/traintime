@@ -63,7 +63,7 @@ struct ArchiveView: View {
               }
               .padding(.leading, 10)
 
-              Text("Duration: " + String(archWorkout.elTime) + " seconds")
+                Text("Duration: " + elTimeToStr(elTime: archWorkout.elTime))
                 .font(.custom("SpaceMono-Bold", size: 18))
                 .foregroundColor(Theme.activeCtrlColor)
               ForEach(archWorkout.exercises, id: \.self) { exercise in

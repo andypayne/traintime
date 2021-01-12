@@ -1,5 +1,20 @@
 import Foundation
 
+func elTimeToHMS(elTime: Int) -> (Int, Int, Int) {
+  return (Int(floor(Double(elTime / 3600))),
+          Int(floor(Double((elTime % 3600) / 60))),
+          Int((elTime % 3600) % 60))
+}
+
+func zeroPad(t: Int) -> String {
+  return (t < 10 ? "0" : "") + String(t)
+}
+
+func elTimeToStr(elTime: Int) -> String {
+  let (h, m, s) = elTimeToHMS(elTime: elTime)
+  return [zeroPad(t: h), zeroPad(t: m), zeroPad(t: s)].joined(separator: ":")
+}
+
 class SimpleTimer: ObservableObject {
   var stimer: Timer
   @Published var elTime: Int
