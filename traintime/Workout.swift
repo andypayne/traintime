@@ -91,15 +91,15 @@ class Workout: ObservableObject, Codable {
     ver = "0.1.1"
     updatedAt = Date().timeIntervalSince1970
     elTime = 0
-    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "pull-ups"))
-    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "squats"))
-    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "dips"))
-    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "hinges"))
-    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "rows"))
-    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "push-ups"))
-    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "anti-extension"))
-    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "anti-rotation"))
-    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "extension"))
+    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "pull-ups", note: ""))
+    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "squats", note: ""))
+    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "dips", note: ""))
+    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "hinges", note: ""))
+    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "rows", note: ""))
+    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "push-ups", note: ""))
+    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "anti-extension", note: ""))
+    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "anti-rotation", note: ""))
+    exercises.append(Exercise(reps1: 5, reps2: 5, reps3: 5, description: "extension", note: ""))
   }
 
   required init(from decoder: Decoder) throws {
@@ -122,6 +122,12 @@ class Workout: ObservableObject, Codable {
     try container.encode(updatedAt, forKey: .updatedAt)
     try container.encode(elTime, forKey: .elTime)
     try container.encode(exercises, forKey: .exercises)
+  }
+  
+  func clearNotes() {
+    for i in 0..<exercises.count {
+      exercises[i].note = ""
+    }
   }
 
 }

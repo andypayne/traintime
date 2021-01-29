@@ -35,10 +35,11 @@ struct ContentView: View {
             }
             Button(action: {
               if self.paused || !self.playing {
-                print("archive")
                 self.workout.elTime = st.elTime
                 self.workout.updatedAt = Date().timeIntervalSince1970
                 pers.write(filename: pers.getArchiveFilename(), workout)
+                self.workout.clearNotes()
+                pers.write(filename: pers.getDefaultFilename(), self.workout)
                 self.st.resetTimer()
                 self.workout.elTime = st.elTime
               }

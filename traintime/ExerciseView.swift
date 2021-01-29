@@ -93,9 +93,14 @@ struct ExerciseView: View {
       } else {
         EmptyView()
       }
-    }.padding(.top, 14)
+    }.onAppear {
+      self.exerNote = self.workout.exercises[exIdx].note ?? ""
+      addNote = self.exerNote.count > 0
+    }
+    .padding(.top, 14)
   }
 }
+
 
 /*
 struct ExerciseView_Previews: PreviewProvider {
