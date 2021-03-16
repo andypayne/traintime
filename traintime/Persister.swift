@@ -4,7 +4,14 @@ extension FileManager {
   func urls(for directory: FileManager.SearchPathDirectory, skipsHiddenFiles: Bool = true ) -> [URL]? {
     let documentsURL = urls(for: directory, in: .userDomainMask)[0]
     let fileURLs = try? contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil, options: skipsHiddenFiles ? .skipsHiddenFiles : [] )
-    return fileURLs
+    var sortedURLs:[URL] = fileURLs ?? []
+    return sortedURLs.sorted(by: {
+      let c1 = $0.pathComponents.count - 1
+      let c2 = $1.pathComponents.count - 1
+      let v1 = $0.pathComponents[c1].split(separator:".")[0].split(separator:"_")[2]
+      let v2 = $1.pathComponents[c2].split(separator:".")[0].split(separator:"_")[2]
+      return Int(v1) ?? 0 > Int(v2) ?? 0
+    })
   }
 }
 
